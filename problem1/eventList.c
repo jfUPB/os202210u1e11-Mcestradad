@@ -108,53 +108,62 @@ void AddEvent(EventList *this, Event *event)
     return NULL;
 }
 
-void AddEvent(EventList *this, Event *event)
-{
-    Event *a = this->head;
 
-    if (this->isEmpty!=0)
-    {
-        
-        while (a != NULL)
-        {
-            int longitud_arr1= sizeof(a->eventName)/sizeof(a->eventName[0]);
-            
-
-            
-            for (int i = 0; i < longitud_arr1; i++) {  //Puede ser cualquier longitud ya que son iguales
-                
-                
-
-                // Comparar 
-                if (a->eventName[i] == event->eventName[i]) 
-                { 
-                    return;
-                }
-                this->head = this->head->next;
-            }
-
-        }
-        
-        this->last->next=event;
-        this->last=event;
-    
-    }
-    else{
-        this->head = event;
-        this->last = event;
-        this->isEmpty= 1;
-    }
-    
-    DestroyEvent(a);
-}
-}
 
 void RemoveEvent(EventList *this, char *name)
 {
+    Event *a = this->head;
+
+    Event *t = SearchEvent(this, name);
+
+    if (t == NULL)
+        return;
+    if (this->isEmpty == 0)
+    {
+        return;
+    }
+    
+    else
+    {
+       
+        while (a != NULL)
+        {
+            
+            
+            if (*(this->head->eventName + 2) == *(name + 2))
+            {
+                this->head = this->head->next;
+                break;
+            }
+
+            else if (*(a->next->eventName + 2) == *(name + 2))
+            {
+                a->next = a->next->next;
+                break;
+            }
+
+            a = a->next;
+            
+        }
+        if (this->head==NULL)
+        {
+            this->isEmpty = 0;
+        }
+    }
 }
 
 void ListEvents(EventList *this)
 {
-    // imprime esto si la lista está vacía
-    printf("empty\n");
+    Event *a = this->head;
+    
+    if (this->isEmpty == 0)
+        printf("empty\n");
+    else
+    {
+        while (a != NULL)
+        {
+            printf("%s\n", a->eventName); 
+            a = a->next;
+        }
+    }
 }
