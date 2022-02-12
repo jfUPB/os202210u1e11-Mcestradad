@@ -29,12 +29,12 @@ Event *SearchEvent(EventList *this, char *name)
        
         while (a != NULL)
         {
-            for(int i=0; i<sizeof(*name); i++){
-            if (*(a->eventName + i) == *(name + i))
+            
+            if (*(a->eventName + 2) == *(name + 2) && *(a->eventName + 3) == *(name + 3))
             {
                 return a;
             }
-            }
+            
             a = a->next;
         }
     }
@@ -51,11 +51,11 @@ void AddEvent(EventList *this, Event *event)
     if (this->isEmpty!=0){
         while (a != NULL)
         {
-            for(int i=0; i<sizeof(*(event->eventName); i++){
-            if(*(a->eventName+i)==*(event->eventName+i)){
+            
+            if(*(a->eventName+2)==*(event->eventName+2) && *(a->eventName+3)==*(event->eventName+3)){
                 return;
             }
-            }
+            
             a = a->next;
         }
 
