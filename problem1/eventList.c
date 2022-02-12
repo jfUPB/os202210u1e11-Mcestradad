@@ -19,7 +19,47 @@ void DestroyEventList(EventList *this)
 
 Event *SearchEvent(EventList *this, char *name)
 {
+    Event *a = this->head; //Evento de referencia para comenzar a buscarlo en la lista.
+    if (this->isEmpty == 0) //Revisar si la lista está vacía.
+    {
+        return NULL;
+    }
+    
+    else
+    {
+       
+        while (a != NULL)  //Cuando no está vacía.
+        {
 
+            int longitud_arr1= sizeof(a->eventName);
+            int longitud_arr2= sizeof(*name);
+
+            if (longitud_arr1 != longitud_arr2)
+            {
+                //printf("No existe el evento");
+                return NULL;
+            }
+            for (int i = 0; i < longitud_arr1; i++) {  //Puede ser cualquier longitud ya que son iguales
+                // Obtener elementos de ambos arreglos en misma posición o índice
+                char valor_arr1 = a->eventName[i], valor_arr2 = name[i];
+
+                // Comparar 
+                if (valor_arr1 == valor_arr2) 
+                {
+                    
+                    return a; 
+                }
+            }
+
+            
+
+            a = a->next;
+        }
+    }
+    
+    DestroyEvent(a);
+    return NULL;
+}
 
     return NULL;
 }
