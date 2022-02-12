@@ -29,12 +29,12 @@ Event *SearchEvent(EventList *this, char *name)
        
         while (a != NULL)
         {
-            
-            if (*(a->eventName + 2) == *(name + 2) && *(a->eventName + 3) == *(name + 3))
+            for(int i=0; i<sizeof(*name); i++){
+            if (*(a->eventName + i) == *(name + i))
             {
                 return a;
             }
-            
+            }
             a = a->next;
         }
     }
@@ -51,11 +51,11 @@ void AddEvent(EventList *this, Event *event)
     if (this->isEmpty!=0){
         while (a != NULL)
         {
-            
-            if(*(a->eventName+2)==*(event->eventName+2) && *(a->eventName+3)==*(event->eventName+3)){
+            for(int i=0; i<sizeof(*(event->eventName); i++){
+            if(*(a->eventName+i)==*(event->eventName+i)){
                 return;
             }
-            
+            }
             a = a->next;
         }
 
@@ -75,9 +75,9 @@ void RemoveEvent(EventList *this, char *name)
     
     Event *a = this->head;
 
-    Event *t = SearchEvent(this, name);
+    Event *b = SearchEvent(this, name);
 
-    if (t == NULL)
+    if (b == NULL)
         return;
     if (this->isEmpty == 0)
     {
@@ -90,13 +90,13 @@ void RemoveEvent(EventList *this, char *name)
         while (a != NULL)
         {
             
-            if (*(this->head->eventName + 2) == *(name + 2) && *(this->head->eventName + 3) == *(name + 3))
+            if (*(this->head->eventName + 2) == *(name + 2))
             {
                 this->head = this->head->next;
                 break;
             }
 
-            else if (*(a->next->eventName + 2) == *(name + 2) && *(a->next->eventName + 3) == *(name + 3))
+            else if (*(a->next->eventName + 2) == *(name + 2))
             {
                 a->next = a->next->next;
                 break;
