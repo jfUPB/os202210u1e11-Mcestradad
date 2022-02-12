@@ -75,9 +75,9 @@ void RemoveEvent(EventList *this, char *name)
     
     Event *a = this->head;
 
-    Event *b = SearchEvent(this, name);
+    Event *t = SearchEvent(this, name);
 
-    if (b == NULL)
+    if (t == NULL)
         return;
     if (this->isEmpty == 0)
     {
